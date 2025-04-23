@@ -1,10 +1,14 @@
 #include "Enemy.h"
 
-Enemy::Enemy(SDL_Renderer* renderer, int x, int y, SDL_Texture* tex, bool isSpecial)
-    : renderer(renderer), texture(tex), special(isSpecial)
+Enemy::Enemy(SDL_Renderer* renderer, int x, int y, SDL_Texture* texture, bool isSpecial)
+    : renderer(renderer), texture(texture), special(isSpecial)
 {
     rect = { x, y, 64, 64 }; // kích thước gà
-    speed = special ? 2 : 3; // gà đặc biệt bay chậm hơn chút
+    speed = special ? 2 : 3; // đặc biệt thì chậm hơn
+}
+
+Enemy::~Enemy() {
+    // Không cần SDL_DestroyTexture vì texture được quản lý bên ngoài
 }
 
 void Enemy::update() {
@@ -12,17 +16,17 @@ void Enemy::update() {
 }
 
 void Enemy::render() {
-    SDL_RenderCopy(renderer, texture, NULL, &rect);
+    SDL_RenderCopy(renderer, texture, nullptr, &rect);
 }
 
-SDL_Rect Enemy::getRect() {
+SDL_Rect Enemy::getRect() const {
     return rect;
 }
 
-bool Enemy::isOutOfScreen() {
-    return rect.y > 600; // giả sử màn hình cao 600px
+bool Enemy::isOffScreen() const {
+    return rect.y > 600; // chiều cao màn hình
 }
 
-bool Enemy::isSpecialChicken() {
+bool Enemy::isSpecialEnemy() const {
     return special;
 }
