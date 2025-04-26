@@ -4,7 +4,8 @@ Enemy::Enemy(SDL_Renderer* renderer, int x, int y, SDL_Texture* texture, bool is
     : renderer(renderer), texture(texture), special(isSpecial)
 {
     rect = { x, y, 64, 64 }; // kích thước gà
-    speed = special ? 2 : 3; // đặc biệt thì chậm hơn
+    speed = 2;
+    hp = special ? 2 : 1;
 }
 
 Enemy::~Enemy() {
@@ -29,4 +30,12 @@ bool Enemy::isOffScreen() const {
 
 bool Enemy::isSpecialEnemy() const {
     return special;
+}
+
+void Enemy::takeDamage(int damage) {
+    hp -= damage;
+}
+
+int Enemy::getHP() const {
+    return hp;
 }

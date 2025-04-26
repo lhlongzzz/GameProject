@@ -14,11 +14,15 @@ class Enemy {
         SDL_Rect getRect() const;     // Lấy vùng va chạm
         bool isOffScreen() const;     // Kiểm tra nếu đã ra khỏi màn hình
         bool isSpecialEnemy() const;
+
+        void takeDamage(int damage);
+        int getHP() const;
     
     private:
         SDL_Renderer* renderer;
         SDL_Texture* texture;
         SDL_Rect rect;
+        int hp;
         int speed;
         bool special;
     };

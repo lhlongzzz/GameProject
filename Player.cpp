@@ -24,6 +24,11 @@ void Player::handleInput(const Uint8* keyState) {
     if (keyState[SDL_SCANCODE_A]) rect.x -= speed;
     if (keyState[SDL_SCANCODE_D]) rect.x += speed;
 
+    if (rect.x < 0) rect.x = 0;
+    if (rect.x + rect.w > 800) rect.x = 800 - rect.w;
+    if (rect.y < 0) rect.y = 0;
+    if (rect.y + rect.h > 600) rect.y = 600 - rect.h;
+
     Uint32 currentTime = SDL_GetTicks();
     if (keyState[SDL_SCANCODE_SPACE] && currentTime - lastShotTime >= shootCooldown) {
         bullets.push_back(new Bullet(renderer, rect.x + rect.w / 2 - 4, rect.y));
