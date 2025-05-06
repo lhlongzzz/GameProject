@@ -7,6 +7,7 @@ Player::Player(SDL_Renderer* renderer) : renderer(renderer), speed(5), lastShotT
     texture = SDL_CreateTextureFromSurface(renderer, surface);
     SDL_FreeSurface(surface);
 
+    hp = 3;
     rect.w = 64;
     rect.h = 64;
     rect.x = 400 - rect.w / 2;
@@ -61,4 +62,20 @@ SDL_Rect Player::getRect() {
 
 std::vector<Bullet*>& Player::getBullets() {
     return bullets;
+}
+
+int Player::getHp() const {
+    return hp;
+}
+
+void Player::loseHp() {
+    if (hp > 0) hp--;
+}
+
+void Player::reset() {
+    hp = 3;
+    rect = {400, 500, 64, 64};
+    for (auto& bullet : bullets) delete bullet;
+    bullets.clear();
+    lastShotTime = 0;
 }

@@ -4,8 +4,8 @@ Enemy::Enemy(SDL_Renderer* renderer, int x, int y, SDL_Texture* texture, bool is
     : renderer(renderer), texture(texture), special(isSpecial)
 {
     rect = { x, y, 64, 64 }; // kích thước gà
-    speed = 2;
-    hp = special ? 2 : 1;
+    speed = special ? 4 : 2;
+    hp = special ? 2 : 3;
 }
 
 Enemy::~Enemy() {

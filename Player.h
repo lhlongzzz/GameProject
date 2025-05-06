@@ -16,12 +16,16 @@ public:
     SDL_Rect getRect();
 
     std::vector<Bullet*>& getBullets();
+    int getHp() const;
+    void loseHp();
+    void reset();
 
 private:
     SDL_Renderer* renderer;
     SDL_Texture* texture;
     SDL_Rect rect;
     int speed;
+    int hp;
 
     std::vector<Bullet*> bullets;
     Uint32 lastShotTime;
