@@ -24,7 +24,7 @@ int main(int argc, char* argv[]) {
     SDL_Texture* bulletTexture = IMG_LoadTexture(renderer, "assets/bullet.png");
     SDL_Texture* heartTexture = IMG_LoadTexture(renderer, "assets/heart.png");
 
-    TTF_Font* font = TTF_OpenFont("assets/arial.ttf", 28);
+    TTF_Font* font = TTF_OpenFont("assets/PressStart2P.ttf", 20);
 
     Mix_Chunk* chickenDieSound = Mix_LoadWAV("assets/chicken_die.oga");
     Mix_Chunk* playerHitSound = Mix_LoadWAV("assets/player_hit.oga");
@@ -78,7 +78,7 @@ int main(int argc, char* argv[]) {
 
         if (showText) {
             SDL_Color white = {255, 255, 255, 255};
-            TTF_Font* menuFont = TTF_OpenFont("assets/arial.ttf", 36);
+            TTF_Font* menuFont = TTF_OpenFont("assets/PressStart2P.ttf", 28);
             SDL_Surface* textSurface = TTF_RenderText_Solid(menuFont, "PRESS SPACE TO START", white);
             SDL_Texture* textTexture = SDL_CreateTextureFromSurface(renderer, textSurface);
 
@@ -109,7 +109,7 @@ int main(int argc, char* argv[]) {
             SDL_RenderClear(renderer);
         
             SDL_Color white = {255, 255, 255, 255};
-            TTF_Font* endFont = TTF_OpenFont("assets/arial.ttf", 36);
+            TTF_Font* endFont = TTF_OpenFont("assets/PressStart2P.ttf", 36);
         
             // Hiển thị "GAME OVER"
             SDL_Surface* endTextSurface = TTF_RenderText_Solid(endFont, "GAME OVER", white);
@@ -173,8 +173,8 @@ int main(int argc, char* argv[]) {
         
         for (int i = 0; i < enemies.size(); ++i) {
             SDL_Rect playerRect = player.getRect();
-            SDL_Rect enemyRect = enemies[i]->getRect();
-            if (SDL_HasIntersection(&playerRect, &enemyRect)) {
+            SDL_Rect enemyHitbox = enemies[i]->getHitbox();
+            if (SDL_HasIntersection(&playerRect, &enemyHitbox)) {
                 Mix_PlayChannel(-1, playerHitSound, 0);
                 player.loseHp();
                 delete enemies[i];
@@ -235,7 +235,7 @@ int main(int argc, char* argv[]) {
         }
 
         SDL_Color white = {255, 255, 255, 255};
-        string scoreText = "Score: " + to_string(score);
+        string scoreText = "Score:" + to_string(score);
         SDL_Surface* scoreSurface = TTF_RenderText_Solid(font, scoreText.c_str(), white);
         SDL_Texture* scoreTexture = SDL_CreateTextureFromSurface(renderer, scoreSurface);
 

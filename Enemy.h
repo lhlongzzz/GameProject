@@ -12,6 +12,7 @@ class Enemy {
         void render();                // Vẽ gà lên màn hình
     
         SDL_Rect getRect() const;     // Lấy vùng va chạm
+        SDL_Rect getHitbox() const ;
         bool isOffScreen() const;     // Kiểm tra nếu đã ra khỏi màn hình
         bool isSpecialEnemy() const;
 

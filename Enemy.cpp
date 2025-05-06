@@ -24,6 +24,14 @@ SDL_Rect Enemy::getRect() const {
     return rect;
 }
 
+SDL_Rect Enemy::getHitbox() const {
+    SDL_Rect hitbox = rect;
+    hitbox.x += 10;
+    hitbox.y += 10;
+    hitbox.w -= 20;
+    hitbox.h -= 20;
+    return hitbox;
+}
 bool Enemy::isOffScreen() const {
     return rect.y > 600; // chiều cao màn hình
 }
